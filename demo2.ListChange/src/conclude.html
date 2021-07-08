@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    (2)注意点:
+        1)import React , {Component} from ' react'不是解构赋值!
+        2)html中容器的id,必须和index.js中写的容器相对应。
+        3)App是外壳组件，里面通常引入其他组件使用。
+
+    2. TodoList案例
+        (1) .组件化编码流程:
+            1.拆分组件:根据功能点划分组件。
+            2.实现静态组件:使用组件实现静态页面效果。
+            3.实现动态组件
+                3.1动态显示初始化数据
+                    3.1.1数据类型
+                    3.1.2数据名称
+                    3.1.2保存在哪个组件?
+                        某个组件用，放在自身;
+                        某些组件用，放在共同父组件中==>状态提升
+                3.2交互(从绑定事件监听开始)
+        (2).状态在哪里，操作状态的方法就在那里
+        (3).关于父子之间通信: 
+            1. [父组件]给[子组件]传递数据:通过props传递
+            2. [子组件]给[父组件]传递数据:通过props传递， 要求父提前给子传递一个函数
+        (4).兄弟组件之间通信:借助共同的父亲
+        (5).关于checked和defaultChecked: 
+            1.什么时候用checked?
+                不仅仅展示勾选的状态，后期还需要响应勾选的动作
+                注意:用了checked,就必项用onChange
+            2.什么时候用defaultChecked?
+                仅仅展示勾选的状态
+                注意: defaultChecked只管第一次渲染
+            3. value和defaultValue也是同理的
+</body>
+</html>
