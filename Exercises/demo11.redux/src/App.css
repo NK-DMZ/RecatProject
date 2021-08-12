@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+  font-size: 50px;
+}
+.example{
+  float: left;
+  height: 350px;
+  width: 50%;
+}
+.examplehr{
+  margin: 25px;
+}
+
