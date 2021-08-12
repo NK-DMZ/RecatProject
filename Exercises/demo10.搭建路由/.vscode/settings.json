@@ -1,0 +1,6 @@
+{
+    "stylelint.config": {},
+    "editor.codeActionsOnSave": {
+        "source.fixAll.stylelint": true
+    }
+}
