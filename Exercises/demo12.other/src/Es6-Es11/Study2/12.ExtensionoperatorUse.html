@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展运算符的使用</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        //1.数组的合并
+        const arrhero1=['天使','安妮','狼人'];
+        const arrhero2=['阿木木','机器人','发条'];
+        //ES5的使用
+        const arrhero3=arrhero1.concat(arrhero2)
+        console.log(arrhero3);
+        //ES6的使用
+        const arrhero4=[...arrhero1,...arrhero2];
+        console.log(arrhero4);
+
+        //2.数组的克隆
+        const arrhero5=[...arrhero2];
+        console.log(arrhero5);
+
+        //3.将伪数组转为真正的数组
+        const divs=document.querySelectorAll('div');
+        console.log("divs:");
+        console.log(divs);
+        const divArr=[...divs];
+        console.log("divArr:");
+        console.log(divArr);
+
+        // 对象的合并
+        let objbase={
+            dynasty:'宋朝',
+            time:320,
+        }
+        let objtime={
+            starttime:960,
+            endtime:1279,
+        }
+        let objchange={
+            dynasty:'唐朝'
+        }
+        const obj={...objbase,...objtime};
+        console.log(obj);
+        const objc={...objbase,objchange}
+        console.log(objc);
+    </script>
+</body>
+</html>

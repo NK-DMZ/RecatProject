@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模版字符串</title>
+</head>
+<body>
+    <script>
+        //ES6引入新的声明字符串的方式 「 ` ` 」 ' '   " "
+        //1. 声明
+        let str1 =`这也是一个字符串`
+        console.log(str1);
+
+        //2.内容中可以直接出现换行符
+        let str2 =
+        `
+        <ul>
+            <li>潘森</li>
+            <li>猴子</li>
+            <li>盖伦</li>
+        </ul>
+        `
+        // " "不可以，会报错
+        // let str3 =
+        // "
+        // <ul>
+        //     <li>潘森</li>
+        //     <li>猴子</li>
+        //     <li>盖伦</li>
+        // </ul>
+        // "
+
+        // 3.变量拼接
+        let age=22
+        let prf=`今年我${age}岁了`
+        console.log(prf);
+    </script>
+</body>
+</html>

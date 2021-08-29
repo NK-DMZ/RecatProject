@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map对象</title>
+</head>
+<body>
+    <script>
+        // 声明Map   键值对
+        let m=new Map();
+
+        // 添加元素
+        m.set('name','map');
+        console.log('添加字符串');
+        console.log(m);
+
+        m.set('change',function () {
+            console.log('map添加方法');
+        });
+        console.log('添加函数');
+        console.log(m);
+
+        let key={
+            school:'atgui'
+        };
+        m.set(key,['北京','上海','深圳'])
+        console.log('添加数组，key可以用变量');
+        console.log(m);
+
+        //size 
+        let len=m.size;
+        console.log('size'+len);
+
+        //删除
+        m.delete('name');
+        console.log('删除');
+        console.log(m);
+
+        // 获取
+        m.get('change');
+        console.log('获取：');
+        console.log(m);
+
+        // 遍历
+        console.log("遍历：");
+        for(let v of m){
+            console.log(v);
+        }
+
+        // 清空
+        m.clear();
+        console.log("清除：");
+        console.log(m);
+    </script>
+</body>
+</html>

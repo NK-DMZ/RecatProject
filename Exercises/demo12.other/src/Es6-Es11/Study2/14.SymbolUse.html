@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol的使用</title>
+</head>
+<body>
+    <script>
+        let  game={
+            down:function (params) {
+                console.log("down");
+            },
+            up:function (params) {
+                console.log("up");
+            }
+        }
+
+        //添加symbol属性
+        let methods={
+            up:Symbol(),
+            down:Symbol(),
+        };
+        
+        game[methods.up]=function (params) {
+            console.log("我可以上升！");
+        }
+        game[methods.down]=function (params) {
+            console.log("我可以下降！");
+        }
+
+        console.log(game);
+
+        let werewolf={
+            name:"狼人杀",
+            [Symbol('say')]:function(){console.log('say');},
+            [Symbol('jump')]:function(){console.log('jump');}
+        }
+        console.log(werewolf);
+    </script>
+</body>
+</html>

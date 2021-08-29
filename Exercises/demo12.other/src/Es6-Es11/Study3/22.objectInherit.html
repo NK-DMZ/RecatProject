@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object中的继承</title>
+</head>
+<body>
+    <script>
+        // 手机
+        function Phone(brand,price) {
+            this.brand=brand;
+            this.price=price;
+        }
+        Phone.prototype.call=function(){
+            console.log('call');
+        }
+
+        //智能手机
+        function SmartPhone(brand,price,color,size) {
+            Phone.call(this,brand,price);
+            this.color=color;
+            this.size=size;
+        }
+        SmartPhone.prototype=new Phone;
+        SmartPhone.prototype.constructor=SmartPhone;
+
+        SmartPhone.prototype.photo=function (params) {
+            console.log('我可以拍照！');
+        }
+        const chuizi=new SmartPhone('锤子',2499,'黑色','6inch');
+        chuizi.call();
+        console.log(chuizi);
+        chuizi.photo();
+    </script>
+</body>
+</html>

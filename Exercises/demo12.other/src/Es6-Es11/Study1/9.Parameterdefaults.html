@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数参数默认值</title>
+</head>
+<body>
+    <script>
+        //ES6允许给函数参数赋值初始值
+        //1.形参初始值 具有默认值的参数，一般位置要靠后（潜规则）
+        function add1(a,b,c=10) {
+            return a+b+c;
+        }
+        let result1 =add1(1,2)
+        console.log(`result1:${result1}`);
+
+        //add2函数中10的默认值被2顶替，所以NaN
+        function add2(a,c=10,b) {
+            return a+b+c;
+        }
+        let result2 =add2(1,2)
+        console.log(`result2:${result2}`);
+
+        //2.与解构赋值结合
+        connect1({
+            host:'localhost',
+            username:'root',
+            password:'root',
+            port:3306
+        })
+        function connect1({host,username,password,port}) {
+            console.log(`host:${host}`);
+            console.log(`username:${username}`);
+            console.log(`password:${password}`);
+            console.log(`port:${port}`);
+        }
+
+        // 有host直接用，没有就用默认的
+        function connect2({host="192.168.12.1",username,password,port}) {
+            console.log(host);
+            console.log(username);
+            console.log(password);
+            console.log(port);
+        }
+        connect2({
+            username:'look',
+            password:'look',
+            port:5000
+        })
+    </script>
+</body>
+</html>

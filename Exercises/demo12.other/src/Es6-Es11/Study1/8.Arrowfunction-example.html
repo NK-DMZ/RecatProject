@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数使用样例</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="ad"></div>
+    <script>
+        //需求-1  点击div  2s  后颜色变成粉色
+        //获取元素
+        let ad=document.getElementById('ad')
+        //绑定事件
+
+        //出现bug
+        // 8.Arrowfunction-example.html:28 Uncaught TypeError: Cannot set property 'background' of undefined   at 8.Arrowfunction-example.html:28
+        // ad.addEventListener("click",function () {
+        //     //定时器
+        //     setTimeout(function () {
+        //         //修改背景颜色
+        //         console.log(this);
+        //         this.style.background='pink'
+        //     },2000)
+        // })
+        // 8.Arrowfunction-example.html:28 Uncaught TypeError: Cannot set property 'background' of undefined   at 8.Arrowfunction-example.html:28
+
+
+        //通过保存this实现功能
+        // ad.addEventListener("click",function () {
+        //     //保存this的值
+        //     let that=this
+        //     //定时器
+        //     setTimeout(function () {
+        //         //修改背景颜色
+        //         console.log(this);
+        //         that.style.background='pink'
+        //     },2000)
+        // })
+
+        //通过箭头函数实现功能
+        ad.addEventListener("click",function () {          
+            setTimeout( ()=>{
+                //修改背景颜色
+                console.log(this);
+                this.style.background='pink'
+            },2000)
+        })
+
+        //需求-2  从数组中返回偶数的元素
+        const arr=[1,2,6,9,100,25]
+        const result1=arr.filter(function (item) {
+            if(item%2 === 0){
+                return true;
+            }else{
+                return false;
+            }
+        })
+
+        const result2=arr.filter(item=> item%2 ===0)
+
+        console.log("result1:"+result1);
+        console.log("result2:"+result2);
+
+        //箭头函数适合与this无关的回调：定时器、数组方法的回调
+        //箭头函数不适合与this有关的回调：时间回调、对象的方法（不适合不代表不可以）
+        {
+            name:'乾隆',
+            getName= ()=>{
+                //输出不是name
+               console.log( this.name);
+            }
+            getName()
+        }
+        
+
+    </script>
+</body>
+</html>

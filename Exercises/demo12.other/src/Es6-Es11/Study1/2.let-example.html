@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let-example</title>
+    <style>
+        .item{
+            width: 25%;
+            height: 200px;
+            border: aqua 1px solid; 
+            float: left;
+            margin: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>点击切换</h2>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <script>
+        //获取div元素对象
+        let items =document.getElementsByClassName('item');
+        //遍历并绑定事件
+        //这里let可以实现， var不能实现,  打印var变量i,得到结果是3
+        for(let i=0;i<items.length;i++){
+            items[i].onclick=function(){
+                items[i].style.background='pink'
+            }
+        }
+        // console.log(i);
+    </script>
+</body>
+</html>

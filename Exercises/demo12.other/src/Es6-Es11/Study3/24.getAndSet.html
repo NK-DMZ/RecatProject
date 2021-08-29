@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get  and  set</title>
+</head>
+<body>
+    <script>
+        class Phone{
+            // get方法用于对外提供数据查询，set方法是对外提供数据修改通道。
+            // get通常对动态属性的一个封装
+            get price(){
+                console.log("价格属性被读取");
+                return 'get'
+            }
+            // 可以进行判断，比如控制他是不是合法的
+            set priceset(newval){
+                console.log(newval);
+            }
+        }
+        // 实例化对象
+        let s=new Phone();
+        console.log(s.price);
+        s.priceset='free'
+    </script>
+</body>
+</html>

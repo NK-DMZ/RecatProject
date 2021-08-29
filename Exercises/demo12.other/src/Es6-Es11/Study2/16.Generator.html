@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成器</title>
+</head>
+<body>
+    <script>
+        //生成器其实就是一个特殊的函数
+        //异步编程  纯回调函数  node fs ajax mongodb
+        // yield是函数代码的分隔符
+        function * fun1() {
+            console.log("异步编程！");
+        }
+        let generator1=fun1();
+        //直接打印打印不出来
+        console.log(generator1);
+        generator1.next()
+
+
+        function * fun2() {
+            console.log(1);
+            yield 'test1'
+            console.log(2);
+            yield 'test2'
+            console.log(3);
+            yield 'test3'
+            console.log(4);
+            //3个yield把代码分割成4块
+        }
+        console.log("----------------");
+        let generator2=fun2();
+        //只执行代码段1
+        generator2.next();
+        generator2.next(); 
+        generator2.next(); 
+        generator2.next()
+
+        function * fun3() {
+            yield 'test1'
+            yield 'test2'
+            yield 'test3'
+        }
+        let generator3=fun3();
+        console.log("----------------");
+        console.log(generator3.next());
+        console.log(generator3.next());
+        console.log(generator3.next());
+        console.log(generator3.next());
+        for(let v of fun3()){
+            console.log(v);
+        }
+    </script>
+    <script>
+        console.log("----------------");
+        function * fun4(arg) {
+            console.log(arg);
+            let one =yield 1;
+            console.log('第2段代码');
+            console.log(one);
+            let two =yield 2;
+            console.log('第3段代码');
+            console.log(two);
+            let three =yield 3;
+            console.log('第4段代码');
+            console.log(three);
+        }
+
+        //执行获取迭代器对象
+        let genobj=fun4('test4');
+        //可以输出arg打印语句，执行 console.log(arg);即第一段代码
+        console.log(genobj.next());
+        //next方法可以传入实参，传参作为第一个yield的返回
+        console.log(genobj.next('a'));
+        // 传参作为第二个yield的返回
+        console.log(genobj.next('b'));
+        // 传参作为第三个yield的返回
+        console.log(genobj.next('c'));
+    </script>
+    <script>
+        console.log('-------------------');
+        //异步编程   文件操作  网络操作（ajax,request） 数据库操作
+        //  1s后控制台输出1   5s后输出2   10秒后输出3
+        // setTimeout(()=>{
+        //     console.log(1);
+        //     setTimeout(()=>{
+        //         console.log(2);
+        //         setTimeout(()=>{
+        //             console.log(3);
+        //         },10000)
+        //     },5000)
+        // },1000)
+        
+        function fun5() {
+            setTimeout(()=>{
+                console.log(5);
+                v1.next();
+            },15000)
+        }
+        function fun6() {
+            setTimeout(()=>{
+                console.log(6);
+            },20000)
+        }
+        function fun7() {
+            setTimeout(()=>{
+                console.log(7);
+            },25000)
+        }
+
+        function * fun8() {
+            yield fun5();
+            yield fun6();
+            yield fun7();
+        }
+
+        let v1=fun8();
+        v1.next();
+    </script>
+</body>
+</html>
