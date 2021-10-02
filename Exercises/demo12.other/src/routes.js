@@ -13,6 +13,7 @@ import ObjectPush from './components/ObjectPush';
 import TablefieldFuzzyQuery from './components/TablefieldFuzzyQuery';
 import SwitchChange from './components/SwitchChange';
 import Parent from './ValueTransmission/Parent';
+import ExportExcel from './components/ExportExcel'
 // routes数组中存储着所有的路由配置，每一个路由配置都是一个对象
 const routes=[
     {path:'/MainMenu',component:MainMenu},
@@ -30,5 +31,6 @@ const routes=[
     {path:'/TablefieldFuzzyQuery',component:TablefieldFuzzyQuery},
     {path:'/SwitchChange',component:SwitchChange},
     {path:'/Parent',component:Parent},
+    {path:'/ExportExcel',component:ExportExcel},
 ]
 export default routes

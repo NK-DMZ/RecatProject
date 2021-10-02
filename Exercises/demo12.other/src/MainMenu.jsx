@@ -11,6 +11,7 @@ export default class MainMenu extends Component {
                     <li><a href="/AssignDemo">AssignDemo</a></li>
                     <li><a href="/AwaitandAsync">AwaitandAsync</a></li>
                     <li><a href="/CopytoClipboard">CopytoClipboard</a></li>
+                    <li><a href="/ExportExcel">ExportExcel</a></li>
                     <li><a href="/InputdemoRef">Inputdemo</a></li>
                     <li><a href="/InputdemoState">InputdemoState</a></li>
                     <li><a href="/JsonDatause">JsonDatause</a></li>
@@ -32,6 +33,7 @@ export default class MainMenu extends Component {
                 <p>AssignDemo              assign对象累加用法</p>
                 <p>AwaitandAsync           JS中的async/await的用法和理解</p>
                 <p>CopytoClipboard         复制到粘贴板</p>
+                <p>ExportExcel             表格导出</p>
                 <p>InputdemoRef            ref输入框数据输入</p>
                 <p>InputdemoState          受控组件state输入</p>
                 <p>JsonDatause             json数据使用</p>

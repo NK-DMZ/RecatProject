@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度面试编程题</title>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>垂直水平居中</h1>
+    <div class="center">
+        kkk
+    </div>
+    <script>
+        // 给一个url输出json
+        var href =
+            "file:///android_asset/hrfile/html/review/reveiw_cc.html?id=1111&sessionid=ssssssssssssssss&domain=http://10.0.100.110:8080/jeesite/a/";
+        var params = href.split("?")[1];
+        console.log(params);
+        var paramArr = params.split('&');
+        console.log(paramArr);
+        var res = {};
+        for (var i = 0; i < paramArr.length; i++) {
+            var str = paramArr[i].split('=');
+            console.log(str);
+            res[str[0]] = str[1];
+        }
+        console.log(res);
+        console.log('-------------------------------');
+    </script>
+    <script>
+        // 给对应的id，输出对应的name
+        var tree = {
+            id: 1,
+            name: 'tree1',
+            children: {
+                id: 2,
+                name: 'tree2',
+                children: {
+                    id: 3,
+                    name: 'tree3',
+                    children: {
+                        id: 4,
+                        name: 'tree4',
+                    }
+                }
+            }
+        }
+
+        function find(tree, id) {
+
+            // for (var i in tree) {
+            //     if(tree.id===id){
+            //         console.log(tree.name);
+            //     }else{
+            //         if(tree.hasOwnProperty('children')){
+            //             tree=tree.children;
+            //         }else{
+            //             console.log('找不到');
+            //         }
+            //     }
+            // }
+
+            tree.forEach(function (id, i) {
+                console.log('forEach遍历:' + i + '--' + id);
+            })
+        }
+        find(tree, 5)
+    </script>
+</body>
+
+</html>

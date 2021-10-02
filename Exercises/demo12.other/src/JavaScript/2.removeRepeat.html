@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组去重</title>
+</head>
+
+<body>
+    <button onclick="removeRepeat1()">forEach去重</button>
+    <button onclick="removeRepeat2()">set集合去重</button>
+    <script>
+        function removeRepeat1() {
+            let arr = ["鸣人", "鸣人", "佐助", "佐助", "小樱", "小樱"];
+            //  方法1：  思路：定义一个新数组，遍历老数组，判断，如果新数组里面没有老数组的元素就添加，否则就不添加；           
+            let newArr = [];
+            //遍历老数组
+            arr.forEach(function (ele, index, array) {
+                //检测老数组中的元素，如果新数组中存在就不添加了，不存在才添加;               
+                if (newArr.indexOf(ele) === -1) {
+                    //不存在就添加;（去新数组中查找元素索引值，如果为-1就是没有）
+                    newArr.push(ele);
+                }
+            });
+            console.log(newArr); // ["鸣人", "佐助", "小樱"]
+        }
+
+        function removeRepeat2() {
+            let arr = [1, 3, 5, 6, 3, 2, 1, 5];
+            // 数组去重
+            let result1 = [...new Set(arr)];
+            console.log('数组去重');
+            console.log(result1);
+        }
+    </script>
+</body>
+
+</html>

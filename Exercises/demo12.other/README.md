@@ -3,6 +3,9 @@
 yarn add antd
 安装了路由
 npm install --save react-router
+安装了库
+npm install js-export-excel
+yarn add js-export-excel -S
 
 AwaitandAsync           JS中的async/await的用法和理解
 AssignDemo              assign对象累加用法

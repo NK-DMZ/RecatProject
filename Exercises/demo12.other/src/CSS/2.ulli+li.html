@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ul li+li</title>
+    <style>
+        ul {
+            color: blue !important;
+        }
+
+        ul>li {
+            color: green;
+        }
+
+        ul li+li {
+            color: red;
+        }
+
+        li {
+            color: rgb(176, 12, 209);
+        }
+
+        /* .ulstyle{
+            color: chocolate;
+        }
+        .ulstyle li{
+            color: darkcyan;
+        } */
+    </style>
+</head>
+
+<body>
+    <h1>ul li+li 这个css选择器表示在ul中除了第一个li 其他li全部选中</h1>
+    <!-- <ul class="ulstyle">
+        <p>class下的li</p>
+        <li>有class的ul下的li</li>
+    </ul> -->
+    <ul >
+        <li>ul下的li</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <li>没有ul的li</li>
+</body>
+
+</html>
