@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>500. 键盘行</title>
+</head>
+
+<body>
+    <div>
+        给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。<br>
+        美式键盘 中：<br>
+        第一行由字符 "qwertyuiop" 组成。<br>
+        第二行由字符 "asdfghjkl" 组成。<br>
+        第三行由字符 "zxcvbnm" 组成。
+        <hr>
+        <img src="../../public/image/keyboard.png" alt="">
+        <hr>
+        示例 1：<br>
+        输入：words = ["Hello","Alaska","Dad","Peace"]
+        输出：["Alaska","Dad"]
+        <hr>
+        示例 2：<br>
+        输入：words = ["omk"]
+        输出：[]
+        <hr>
+        示例 3：<br>
+        输入：words = ["adsdf","sfd"]
+        输出：["adsdf","sfd"]
+        <hr>
+        提示：<br>
+        <!-- 
+            1 <= words.length <= 20
+            1 <= words[i].length <= 100
+            words[i] 由英文字母（小写和大写字母）组成 
+        -->
+    </div>
+    <script>
+        var findWords = function (words) {
+            let keyboard = ["qwertyuiop","asdfghjkl","zxcvbnm"];
+            let res = words[3][0];
+            console.log(res);
+            // for(let i = 0; i < words.length ; i++){
+
+            // }
+        };
+        findWords(["Hello", "Alaska", "Dad", "Peace"])
+    </script>
+</body>
+
+</html>

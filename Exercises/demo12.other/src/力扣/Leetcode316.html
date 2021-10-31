@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>316. 去除重复字母</title>
+</head>
+
+<body>
+    <div>
+        <a href="https://leetcode-cn.com/problems/remove-duplicate-letters/">316. 去除重复字母</a>
+        <hr>
+        给你一个字符串 s ，请你去除字符串中重复的字母，使得每个字母只出现一次。需保证 返回结果的字典序最小（要求不能打乱其他字符的相对位置）。
+        注意：该题与 1081 https://leetcode-cn.com/problems/smallest-subsequence-of-distinct-characters 相同
+        <hr>
+        示例 1：
+        <br>
+        输入：s = "bcabc"
+        输出："abc"
+        <hr>
+        示例 2：
+        <br>
+        输入：s = "cbacdcbc"
+        输出："acdb"
+        <hr>
+        提示：
+        <!-- 1 <= s.length <=104 s 由小写英文字母组成    -->
+        <hr>
+        316. 去除重复字母(困难)
+        <hr>
+        思路：
+        <p>
+            1.先把字符串转为字符数组array.split('')
+            2.新建一个集合set    new Set(array)
+            3.新建一个数组保存set转换的结果：num
+            2.遍历整个字符串，对当前字符
+            (1)若栈中为空，则当前字符压栈
+            (2)若当前字符大于栈顶字符，则当前字符压栈
+            (3)若栈顶元素在当前字符后不再出现，则当前字符压栈
+            若上述三种情况都不符合，则将栈顶元素出栈，再压栈
+            直到符合三情况中的任意一种
+            3.拼接栈顶元素并反转后返回字符串
+        </p>
+        <br>
+        321. 拼接最大数(困难)
+        <br>
+        402. 移掉 K 位数字(中等)
+        <br>
+        1081. 不同字符的最小子序列（中等）
+    </div>
+    <script>
+        var removeDuplicateLetters = function (s) {
+            console.log(s);
+            // 1.先把字符串转为字符数组array.split(''),初始数组sarr
+            let str = s;
+            let sarr = str.split('');
+            console.log(sarr);
+            // 2.新建一个集合set    new Set(array)
+            let tempset = new Set(sarr);
+            console.log(tempset);
+            // 3.新建一个数组保存set转换的结果：num
+            let num = [];
+            for (let i of tempset) {
+                num.push(i)
+            }
+            // 4.对转换结果进行排序
+            num.sort();
+            console.log(num); //通过集合过滤排序好的数组
+            // 5.新建一个数组存储每个num字符对应有多少个字符，先初始化为0,显示的和注释的都是一个功能，但是显示的从运行结果来看，执行时间长，内存消耗大
+            let numarr = new Array(num.length).fill(0);
+            // let numarr =[];
+            // for (let l = 0; l < num.length; l++) {
+            //     numarr[l] = 0;
+            // }
+            // 6.遍历把字符对应的个数存进去numarr
+            for (let j in sarr) {
+                for (let k in num) {
+                    if (sarr[j] === num[k]) {
+                        numarr[k] = numarr[k] + 1;
+                    }
+                }
+            }
+            console.log(numarr); //numarr是每个字符出现的数目
+            let res = [];//结果
+            let mark;//栈顶元素在num数组中的下标
+            // 7.新建临时数组，初始时和num一样，这个数组用于记录置0，把前面的小字母置0后就把最头上置0的数shift出去
+            let remainarr = Object.assign([], num)
+            console.log(`克隆num：${remainarr}`);
+            // 8.遍历初始字符数组sarr与集合清理后的数组num，如果匹配进行操作
+            for (let m in sarr) {
+                for (let n in num) {
+                    // 9.从初始数组中找到对应的num数组中的字符位置后，这个num数组中的字符剩余出现次数应该减1
+                    if (sarr[m] === num[n]) {
+                        numarr[n] = numarr[n] - 1;
+                        // console.log(`栈顶元素${res[res.length-1]}`);
+                        // console.log(`当前元素${sarr[m]}`);
+                        //10.对res数组结果简历一个集合，后面用于比较当前元素在结果中有没有
+                        let lastset = new Set(res);
+                        //11.这里需要循环和栈顶进行比较，栈顶元素与当前元素比较，栈顶元素大于当前元素，并且栈顶元素剩余数大于1，则出栈 
+                        while (sarr[m] < res[res.length - 1] && numarr[mark] > 0) {
+                            // 12.res结果集合中如果有当前准备入栈元素则跳出本次循环
+                            if(lastset.has(sarr[m])){
+                                break;
+                            }
+                            // pop出栈顶元素
+                            res.pop(res[res.length - 1]);
+                            // 13.更新当前栈顶元素在num中的下标
+                            for (let h = 0; h < num.length; h++) {
+                                if (num[h] === res[res.length - 1]) {
+                                    mark = h; //栈顶元素在num数组中的下标
+                                }
+                            }
+                        }
+                        // 14.如果res结果集合小于num数组长度（即肯定没结束），并且集合中没有当前准备入栈元素，当前元素入栈，否则跳出本次循环
+                        if (lastset.size < num.length && !lastset.has(sarr[m])) {
+                            res.push(sarr[m]);
+                        } else {
+                            break;
+                        }
+                        // 15.更新res集合中的数据
+                        for (let i in res) {
+                            lastset.add(res[i])
+                        }
+                        // 16.更新Mark下标
+                        mark = n; 
+                        // 如果num里面最小的数入栈后，numarr对应的直接置为0， 这个地方有个问题：之前入栈的被shift出去了，现在进栈的不是最新的，
+                        // 进来是y，但是要被移出去的是c，事实是把y的下标置0了，因此要获取c的下标               （问题已解决）
+                        // 17.判断res集合中有没有remainarr数组第一个元素，如果有则把这个元素对应的剩余值置0，并移除
+                        if (lastset.has(remainarr[0])) {
+                            for(let w in num){
+                                if(remainarr[0] === num[w]){
+                                    numarr[w] = 0;
+                                }
+                            }                            
+                            remainarr.shift();
+                        }
+                    }
+                }
+            }
+            // 18.结果整理后进行输出，array.join("")把数组转为字符串
+            res = res.join("")
+            console.log(res);
+        };
+        // removeDuplicateLetters("bcabc")
+        //abc
+        // removeDuplicateLetters("cbacdcbc")
+        //acdb
+        // removeDuplicateLetters("cdadabcc")
+        // adbc
+        // removeDuplicateLetters("abacb")
+        //abc
+        // removeDuplicateLetters("ccacbaba")
+        //acb
+        // removeDuplicateLetters("bbbacacca")
+        //bac
+        // removeDuplicateLetters("bddbccd")
+        //bcd
+        // removeDuplicateLetters("mitnlruhznjfyzmtmfnstsxwktxlboxutbic")
+        //ilrhjfyzmnstwkboxuc
+         removeDuplicateLetters("yioccqiorhtoslwlvfgzycahonecugtatbyphpuunwvaalcpndabyldkdtzfjlgwqk")
+        // "ciorhsaebpunvdyktzfjlgwq"
+
+
+
+
+    </script>
+    <!-- <script>
+        // 这个版本输出["b", "a", "b", "c"]，没有持续出栈
+        var removeDuplicateLetters = function (s) {
+            console.log(s);
+            let str = s;
+            let sarr = str.split('');
+            console.log(sarr);
+            let tempset = new Set(sarr);
+            console.log(tempset);
+            let num = [];
+            for (let i of tempset) {
+                num.push(i)
+            }
+            num.sort();
+            console.log(num); //通过集合过滤排序好的数组
+            let numarr = [];
+            for (let l = 0; l < num.length; l++) {
+                numarr[l] = 0;
+            }
+            for (let j in sarr) {
+                for (let k in num) {
+                    if (sarr[j] === num[k]) {
+                        numarr[k] = numarr[k] + 1;
+                    }
+                }
+            }
+            console.log(numarr); //numarr是每个字符出现的数目
+            let res = [];
+            // res.push(sarr[0])
+            let mark;
+            for (let m in sarr) {
+                for (let n in num) {
+                    // 如果栈顶元素大于当前准备入栈元素，而且栈顶剩余出现次数不为0，pop栈顶元素
+                    if (sarr[m] === num[n]) {
+                        numarr[n] = numarr[n] - 1;
+                        console.log(`栈顶元素${res[res.length-1]}`);
+                        console.log(`当前元素${sarr[m]}`);
+                        //栈顶元素的下标
+                        //这里需要循环和栈顶进行比较                        
+                        if (res.length === 0 || res[res.length - 1] < sarr[m] || numarr[mark] === 0) {
+                            let lastset = new Set(res);
+                            if (lastset.size < num.length) {
+                                res.push(sarr[m]);
+                            } else {
+                                break;
+                            }
+                        } else {
+                            let lastset = new Set(res);
+                            if (lastset.size < num.length) {
+                                res.pop(res[res.length - 1]);
+                                res.push(sarr[m]);
+                            } else {
+                                break;
+                            }
+                        }
+                        mark = n; //栈顶元素在num数组中的下标
+                    }
+
+
+                }
+            }
+            console.log(res);
+        };
+        removeDuplicateLetters("bcabc")
+        // removeDuplicateLetters("cbacdcbc")
+    </script> -->
+    <!-- <script>
+        // 这个版本输出["a", "c", "d", "b", "c"]没有末端判断
+        var removeDuplicateLetters = function (s) {
+            console.log(s);
+            let str = s;
+            let sarr = str.split('');
+            console.log(sarr);
+            let tempset = new Set(sarr);
+            console.log(tempset);
+            let num = [];
+            for (let i of tempset) {
+                num.push(i)
+            }
+            num.sort();
+            console.log(num); //通过集合过滤排序好的数组
+            let numarr = [];
+            for (let l = 0; l < num.length; l++) {
+                numarr[l] = 0;
+            }
+            for (let j in sarr) {
+                for (let k in num) {
+                    if (sarr[j] === num[k]) {
+                        numarr[k] = numarr[k] + 1;
+                    }
+                }
+            }
+            console.log(numarr); //numarr是每个字符出现的数目
+            let res = [];
+            let mark;
+            for (let m in sarr) {
+                for (let n in num) {
+                    // 如果栈顶元素大于当前准备入栈元素，而且栈顶剩余出现次数不为0，pop栈顶元素
+                    if (sarr[m] === num[n]) {
+                        numarr[n] = numarr[n] - 1;
+                        console.log(`栈顶元素${res[res.length-1]}`);
+                        console.log(`当前元素${sarr[m]}`);
+                        //栈顶元素的下标
+                        //这里需要循环和栈顶进行比较                        
+                        if (res.length === 0 || res[res.length - 1] < sarr[m] || numarr[mark] === 0) {
+                            res.push(sarr[m]);
+                        } else {
+                            res.pop(res[res.length - 1]);
+                            res.push(sarr[m]);
+                        }
+                        mark = n; //栈顶元素在num数组中的下标
+                    }
+
+
+                }
+            }
+            console.log(res);
+        };
+        // removeDuplicateLetters("bcabc")
+        removeDuplicateLetters("cbacdcbc")
+    </script> -->
+</body>
+
+</html>

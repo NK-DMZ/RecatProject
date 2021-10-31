@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二分查找</title>
+</head>
+<body>
+    <div>二分查找</div>
+    <script>
+        function binarySearch(arr , target) {
+            let left = arr.length - 1;
+            let right = 0;
+            while(left > right){
+                mid = Math.floor((left + right) / 2);
+                if(arr[mid] == target){
+                    console.log("已经找到了！");
+                    console.log(`下标为：${mid}`);
+                    break;
+                }else if(arr[mid] < target){
+                    left = mid + 1;
+                }else{
+                    right = mid - 1;
+                }
+            }
+        }
+        binarySearch([24,69,100,99,79,78,67,36,26,19],100)        
+    </script>
+</body>
+</html>

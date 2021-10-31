@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装js实现url的拼接</title>
+</head>
+
+<body>
+    <script>
+        function getUrlParam(sUrl, sKey) {
+            var paramArr = sUrl.split('?')[1].split('#')[0].split('&'); // 取出每个参数的键值对放入数组
+            const obj = {};
+            paramArr.forEach(element => {
+                const [key, value] = element.split('='); // 取出数组中每一项的键与值
+                if (obj[key] === void 0) { // 表示第一次遍历这个元素，直接添加到对象上面
+                    obj[key] = value
+                } else {
+                    obj[key] = [].concat(obj[key], value); // 表示不是第一次遍历说明这个键已有，通过数组存起来。
+                }
+            });
+            console.log(sKey === void 0 ? obj : obj[sKey] || '');
+            return sKey === void 0 ? obj : obj[sKey] || '' // 如果该方法为一个参数，则返回对象。
+            //如果为两个参数，sKey存在，则返回值或数组，否则返回空字符。
+        }
+        getUrlParam("http://www.nowcoder.com?key=1&key=2&key=3&test=4#hehe")
+        getUrlParam("https://weixin.sogou.com/weixin?query=边缘计算&ie=utf8&type=2&sourceid=weixinvr")
+
+        console.log("----------------------------");
+    </script>
+    <!-- 
+            把URL转对象,
+            我的方法和别人的方法的区别是：
+            在url里面有多个属性重名时只能取最后一个，别人的保存到了一个数组，
+            {key: Array(3), test: "4"}  别人的
+            key: (3) ["1", "2", "3"]  test: "4"
+            {key: "3", test: "4"}       我的
+         -->
+    <script>
+        function getUrlParamOwn(surl, sKey) {
+            let arr = surl.split("")
+            let str = '';
+            let objarr = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === '?' || arr[i] === '&' || arr[i] === '#') {
+                    objarr.push(str)
+                    str = '';
+                } else {
+                    str += arr[i];
+                }
+                if (i === arr.length - 1) {
+                    objarr.push(str)
+                    str = '';
+                }
+
+            }
+            let obj = {};
+            for (let j = 0; j < objarr.length; j++) {
+                let temp = objarr[j].split("");
+                let tempstr = "";
+                let tempres = [];
+                for (let k = 0; k < temp.length; k++) {
+                    if (temp[k] === "=") {
+                        tempres.push(tempstr)
+                        tempstr = '';
+                    } else {
+                        tempstr += temp[k];
+                    }
+                    if (k === temp.length - 1) {
+                        tempres.push(tempstr)
+                        tempstr = '';
+                    }
+                }
+                if (tempres.length > 1) {
+                    obj[tempres[0]] = tempres[1];
+                }
+                // console.log(tempres);
+            }
+            // console.log(objarr);
+            console.log(obj);
+        }
+
+        getUrlParamOwn("http://www.nowcoder.com?key=1&key=2&key=3&test=4#hehe", "key")
+        getUrlParamOwn("https://weixin.sogou.com/weixin?query=边缘计算&ie=utf8&type=2&sourceid=weixinvr")
+    </script>
+
+
+</body>
+
+</html>
